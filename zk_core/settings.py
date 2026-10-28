@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(
         "ALLOWED_HOSTS",
-        "localhost,127.0.0.1,testserver,zero-knowledge-lake.vercel.app"
+        "localhost,127.0.0.1,testserver,zero-knowledge-zk.vercel.app"
     ).split(",")
     if host.strip()
 ]
@@ -48,7 +48,7 @@ CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
         "CSRF_TRUSTED_ORIGINS",
-        "https://zero-knowledge-lake.vercel.app"
+        "https://zero-knowledge-zk.vercel.app"
     ).split(",")
     if origin.strip()
 ]
