@@ -24,13 +24,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)g^2z18zu^*i4g@4og-w^hc5ixcdg4)zw%9iluy9ty_u51zl^u'
+# Secret key
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-local-development-only-change-this"
+)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Debug mode
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+# Allowed hosts
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "ALLOWED_HOSTS",
+        "localhost,127.0.0.1,testserver,zero-knowledge-lake.vercel.app"
+    ).split(",")
+    if host.strip()
+]
+
+# CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://zero-knowledge-lake.vercel.app"
+    ).split(",")
+    if origin.strip()
+]
 
 
 # Application definition
